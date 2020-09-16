@@ -13,7 +13,8 @@ const resolvers = {
     async allResource(root, _, {
       models
     }) {
-      return models.resource.findAll();
+      const allResources = await models.resource.findAll()
+      return allResources
     },
     async allCategories(root, _, {
       models

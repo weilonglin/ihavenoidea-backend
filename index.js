@@ -22,7 +22,7 @@ const server = new ApolloServer({
   context: {
     models
   },
-
+  playground: false
 });
 
 server
