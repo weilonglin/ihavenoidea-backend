@@ -14,15 +14,18 @@ module.exports = (sequelize, DataTypes) => {
         as: "category",
         foreignKey: "subjectId",
       });
-      resource.belongsToMany(models.tag, {
-        as: "resTag",
-        through: "resourceTags",
-        foreignKey: "resourceId",
-      });
+
       resource.hasMany(models.vote, {
-        as: "votes",
+        as: "vote",
         foreignKey: "resourceId"
       });
+
+      resource.belongsToMany(models.tag, {
+        through: "resourceTags",
+        as: "tags",
+        foreignKey: "resourceId"
+      })
+
     }
   }
   resource.init({

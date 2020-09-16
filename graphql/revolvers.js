@@ -1,6 +1,6 @@
 const resourcetag = require("../models/resourcetag");
 const vote = require("../models/vote");
-
+const sequelize = require("sequelize");
 const resolvers = {
   Query: {
     async resource(root, {
@@ -14,21 +14,29 @@ const resolvers = {
       models
     }) {
       const allResources = await models.resource.findAll({
+
         include: [{
           model: models.subject,
           as: "category"
-        }],
-        include: [{
+        }, {
           model: models.tag,
-          as: "resTag"
+          as: "tags",
+        }, {
+          model: models.vote,
+          as: "vote",
+
+
         }],
-        // include: [{
-        //   model: models.votes,
-        //   as: "votes"
-        // }],
+
       })
+
+
       return allResources
     },
+
+
+
+
     async allCategories(root, _, {
       models
     }) {

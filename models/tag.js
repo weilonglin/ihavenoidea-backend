@@ -11,10 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       tag.belongsToMany(models.resource, {
-        as: "resTag",
-        through: "joinTableTags",
-        foreignKey: "tagId",
-      });
+        through: "resourceTags",
+        as: "resources",
+        foreignKey: "tagId"
+      })
+
     }
   }
   tag.init({

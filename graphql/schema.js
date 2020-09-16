@@ -9,9 +9,16 @@ const typeDefs = gql `
     link: String
     description: String
     category: Subject
-    resourcetag: [String]
-    vote: Int
+    resourcetag: [Tag]
+    vote: [Vote]
     subjectId: Int
+    tags: [Tag]
+  }
+
+  type ResourceTag {
+    id: Int
+    tagId: Int
+    resourceId: Int
   }
 
   input ResourceInput {
@@ -49,6 +56,7 @@ const typeDefs = gql `
     resource(id: Int!): Resource!
     subject(id: Int!): Subject!
     allResource: [Resource]
+    resourceTags: [ResourceTag]
     vote: [Vote]
     tag: [Tag]
     allCategories: [Subject]
