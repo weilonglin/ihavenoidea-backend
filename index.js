@@ -1,4 +1,6 @@
-const { ApolloServer } = require("apollo-server");
+const {
+  ApolloServer
+} = require("apollo-server");
 
 const path = require("path");
 
@@ -17,13 +19,18 @@ const server = new ApolloServer({
   },
   typeDefs,
   resolvers,
-  context: { models },
+  context: {
+    models
+  },
+  playground: true,
 });
 
 server
   .listen({
     port: process.env.PORT || 4000,
   })
-  .then(({ url }) => {
+  .then(({
+    url
+  }) => {
     console.log(`Server started at ${url}`);
   });
