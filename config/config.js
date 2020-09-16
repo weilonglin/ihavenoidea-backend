@@ -8,7 +8,7 @@ module.exports = {
     url: process.env.POSTGRES_URI,
     dialect: "postgres",
     operatorsAliases: "0",
-    use_env_variable: "DATABASE_URL",
+
   },
   test: {
     username: "root",
