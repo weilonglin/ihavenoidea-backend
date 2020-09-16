@@ -18,6 +18,10 @@ module.exports = {
     dialect: "mysql",
   },
   production: {
+    pool: {
+      max: 3,
+      min: 0,
+    },
     url: process.env.POSTGRES_URI,
     dialect: "postgres",
   },
