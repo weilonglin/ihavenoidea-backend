@@ -1,5 +1,7 @@
 "use strict";
-const { Model } = require("sequelize");
+const {
+  Model
+} = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class vote extends Model {
     /**
@@ -14,17 +16,14 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  vote.init(
-    {
-      userIp: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
+  vote.init({
+    userIp: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
-    {
-      sequelize,
-      modelName: "vote",
-    }
-  );
+  }, {
+    sequelize,
+    modelName: "vote",
+  });
   return vote;
 };

@@ -1,5 +1,7 @@
 "use strict";
-const { Model } = require("sequelize");
+const {
+  Model
+} = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class resource extends Model {
     /**
@@ -12,32 +14,36 @@ module.exports = (sequelize, DataTypes) => {
         as: "category",
         foreignKey: "subjectId",
       });
+
+      resource.hasMany(models.vote, {
+        as: "vote",
+        foreignKey: "resourceId"
+      });
+
       resource.belongsToMany(models.tag, {
         through: "resourceTags",
-        foreignKey: "resourceId",
-      });
-      resource.hasMany(models.vote, { as: "votes", foreignKey: "resourceId" });
+        as: "tags",
+        foreignKey: "resourceId"
+      })
+
     }
   }
-  resource.init(
-    {
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      link: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      description: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+  resource.init({
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    {
-      sequelize,
-      modelName: "resource",
-    }
-  );
+    link: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  }, {
+    sequelize,
+    modelName: "resource",
+  });
   return resource;
 };

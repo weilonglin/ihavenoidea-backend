@@ -1,6 +1,3 @@
-const resourcetag = require("../models/resourcetag");
-const vote = require("../models/vote");
-
 const resolvers = {
   Query: {
     async resource(root, {
@@ -13,9 +10,25 @@ const resolvers = {
     async allResource(root, _, {
       models
     }) {
-      const allResources = await models.resource.findAll()
+      const allResources = await models.resource.findAll({
+
+        include: [{
+          model: models.subject,
+          as: "category"
+        }, {
+          model: models.tag,
+          as: "tags",
+        }, {
+          model: models.vote,
+          as: "vote",
+        }],
+      })
       return allResources
     },
+
+
+
+
     async allCategories(root, _, {
       models
     }) {
@@ -125,21 +138,21 @@ const resolvers = {
     }
 
   },
-  Resource: {
-    async category(subject) {
-      return subject.getCategory();
-    },
-    async resourcetag(tag) {
+  // Resource: {
+  //   async category(subject) {
+  //     return subject.getCategory();
+  //   },
+  //   async resourcetag(tag) {
 
-      return tag.getTags().then(res => {
-        return res.map(tag => tag.name)
-      });
-    },
-    async vote(votes) {
-      const lengthOf = await votes.getVotes();
-      return lengthOf.length;
-    },
-  },
+  //     return tag.getTags().then(res => {
+  //       return res.map(tag => tag.name)
+  //     });
+  //   },
+  //   async vote(votes) {
+  //     const lengthOf = await votes.getVotes();
+  //     return lengthOf.length;
+  //   },
+  // },
 };
 
 module.exports = resolvers;
