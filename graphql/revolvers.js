@@ -1,6 +1,3 @@
-const resourcetag = require("../models/resourcetag");
-const vote = require("../models/vote");
-const sequelize = require("sequelize");
 const resolvers = {
   Query: {
     async resource(root, {
@@ -24,13 +21,8 @@ const resolvers = {
         }, {
           model: models.vote,
           as: "vote",
-
-
         }],
-
       })
-
-
       return allResources
     },
 
